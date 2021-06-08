@@ -1,5 +1,5 @@
 PROGRAM=kbrowser
-OBJECTS=kbrowser.o
+OBJECTS=kbrowser.o main.o
 
 CC=g++
 CFLAGS=$(shell pkg-config --cflags gtkmm-3.0 webkit2gtk-4.0)
