@@ -1,5 +1,6 @@
 #include "kbrowser.h"
 #include <gtkmm/application.h>
+#include <webkit2/webkit2.h>
 #include "json.hpp"
 #include <fstream>
 
@@ -43,6 +44,13 @@ int main(int argc, char *argv[])
     else
     {
         web_view = WEBKIT_WEB_VIEW(webkit_web_view_new());
+    }
+
+    //Hardware acceleration
+    if(config["hw_accleration"]==true){
+        WebKitSettings *settings = webkit_web_view_get_settings(WEBKIT_WEB_VIEW(web_view));
+        g_object_set(G_OBJECT(settings),"enable-webgl",TRUE,NULL);
+        g_object_set(G_OBJECT(settings),"enable-accelerated-composting",TRUE,NULL);
     }
 
     std::string url = config["url"];
