@@ -11,7 +11,6 @@
 #include "json.hpp"
 #include <fstream>
 #include <iostream>
-#include <vector>
 
 using json = nlohmann::json;
 
