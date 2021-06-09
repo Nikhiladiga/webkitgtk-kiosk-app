@@ -3,6 +3,8 @@
 #include <webkit2/webkit2.h>
 #include "json.hpp"
 #include <fstream>
+#include <string>
+#include <iostream>
 
 #define PROGRAM_NAME "kbrowser"
 #define AUTHORS proper_name("Nikhil Adiga")
@@ -22,7 +24,7 @@ int main(int argc, char *argv[])
     config = json::parse(ifs);
 
     //Fullscreen
-    if (config["kiosk"] == true)
+    if (config["kiosk"])
     {
         kbrowser.fullscreen();
     }
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
     }
 
     //Audio Autoplay
-    if (config["autoplay"] == true)
+    if (config["autoplay"])
     {
         WebKitAutoplayPolicy autoplay = WEBKIT_AUTOPLAY_ALLOW;
         WebKitWebsitePolicies *wp = webkit_website_policies_new_with_policies("autoplay", autoplay, NULL);
@@ -47,15 +49,14 @@ int main(int argc, char *argv[])
     }
 
     //Hardware acceleration
-    if (config["hw_accleration"] == true)
+    if (config["hw_acceleration"])
     {
         WebKitSettings *hwsettings = webkit_web_view_get_settings(WEBKIT_WEB_VIEW(web_view));
         g_object_set(G_OBJECT(hwsettings), "enable-webgl", TRUE, NULL);
-        g_object_set(G_OBJECT(hwsettings), "enable-accelerated-composting", TRUE, NULL);
     }
 
     //Developer tools
-    if (config["dev_tools"] == true)
+    if (config["dev_tools"])
     {
         WebKitSettings *dtsettings = webkit_web_view_get_settings(WEBKIT_WEB_VIEW(web_view));
         g_object_set(G_OBJECT(dtsettings), "enable-developer-extras", TRUE, NULL);
@@ -75,5 +76,5 @@ int main(int argc, char *argv[])
 
     app->run(kbrowser);
 
-    exit(0);
+    return 0;
 }

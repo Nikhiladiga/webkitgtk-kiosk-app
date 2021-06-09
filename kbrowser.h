@@ -4,12 +4,12 @@
 #include <gtkmm.h>
 #include <webkit2/webkit2.h>
 
-class KBrowser : public Gtk::Window
+class KBrowser final : public Gtk::Window
 {
 
 public:
     KBrowser();
-    ~KBrowser() override;
+    ~KBrowser() = default;
     
     bool onKeyPress(GdkEventKey *);
     static gboolean reload_timer(gpointer user_data);
