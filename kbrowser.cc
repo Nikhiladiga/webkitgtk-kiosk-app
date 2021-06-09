@@ -22,7 +22,7 @@ bool KBrowser::onKeyPress(GdkEventKey *event)
 
 gboolean KBrowser::reload_timer(gpointer user_data)
 {
-  std::string failing_uri = reinterpret_cast<const char *>(user_data);
+  std::string failing_uri = static_cast<const char *>(user_data);
   webkit_web_view_load_uri(web_view, &failing_uri[0]);
   return FALSE;
 }
