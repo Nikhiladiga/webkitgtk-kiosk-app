@@ -47,10 +47,18 @@ int main(int argc, char *argv[])
     }
 
     //Hardware acceleration
-    if(config["hw_accleration"]==true){
-        WebKitSettings *settings = webkit_web_view_get_settings(WEBKIT_WEB_VIEW(web_view));
-        g_object_set(G_OBJECT(settings),"enable-webgl",TRUE,NULL);
-        g_object_set(G_OBJECT(settings),"enable-accelerated-composting",TRUE,NULL);
+    if (config["hw_accleration"] == true)
+    {
+        WebKitSettings *hwsettings = webkit_web_view_get_settings(WEBKIT_WEB_VIEW(web_view));
+        g_object_set(G_OBJECT(hwsettings), "enable-webgl", TRUE, NULL);
+        g_object_set(G_OBJECT(hwsettings), "enable-accelerated-composting", TRUE, NULL);
+    }
+
+    //Developer tools
+    if (config["dev_tools"] == true)
+    {
+        WebKitSettings *dtsettings = webkit_web_view_get_settings(WEBKIT_WEB_VIEW(web_view));
+        g_object_set(G_OBJECT(dtsettings), "enable-developer-extras", TRUE, NULL);
     }
 
     std::string url = config["url"];
